@@ -1,64 +1,58 @@
-import ClientApi, { ApiEndpointName } from "@/(api)/client";
+import { ApiEndpointName } from "@/(api)/client";
+import Endpoints from "./endpoints";
 
-interface CallApiProps<Payload> {
-  name: ApiEndpointName;
+export interface CallApiProps<Payload> {
+  endpoint: ApiEndpointName;
   payload?: Payload;
   segments?: { [key: string]: string };
 }
 
-export interface CallApiResponse<Result> {
+export interface ApiResponse<Result> {
   ok: boolean;
   status: number;
-  result: Result | null | undefined;
-  error?: string | null;
+  result: Result;
+}
+
+function replaceSegments(path: string, segments: { [key: string]: string }) {
+  return Object.keys(segments).reduce((acc, key) => {
+    return acc.replace(`:${key}`, segments[key]);
+  }, path);
 }
 
 export async function call<Payload, Result>({
-  name,
+  endpoint: name,
   payload,
   segments,
-}: CallApiProps<Payload>): Promise<CallApiResponse<Result>> {
-  const route = ClientApi[name];
+}: CallApiProps<Payload>): Promise<ApiResponse<Result>> {
+  const endpoint = Endpoints[name];
+
+  if (!endpoint) {
+    throw new Error(`No endpoint found for ${endpoint}`);
+  }
 
   if (segments) {
-    route.path = Object.keys(segments).reduce((acc, key) => {
-      return acc.replace(`:${key}`, segments[key]);
-    }, route.path);
+    endpoint.path = replaceSegments(endpoint.path, segments);
   }
 
   const fetchOptions: RequestInit = {
-    method: route.method,
-    headers: route.headers,
-    body: route.method === "GET" ? null : JSON.stringify(payload),
+    method: endpoint.method,
+    headers: {
+      "Content-Type": "application/json",
+      ...endpoint.headers,
+    },
   };
 
-  const response = await fetch(route.path, fetchOptions);
-
-  const result = await response.json().catch((err) => {
-    const errorMessage = `Error parsing response from ${route.path}`;
-
-    return {
-      ok: false,
-      status: response.status,
-      result: null,
-      error: errorMessage,
-    };
-  });
-
-  if (!response.ok || response.status >= 400) {
-    console.error(`Error calling ${name} at ${route.path}: ${result.error}`);
-
-    return {
-      ok: false,
-      status: response.status,
-      result: null,
-      error: result,
-    };
+  if (payload) {
+    fetchOptions.body = JSON.stringify(payload);
   }
+
+  const response = await fetch(endpoint.path, fetchOptions);
+
+  const result = await response.json();
 
   return {
     ok: response.ok,
     status: response.status,
-    result: result,
+    result,
   };
 }

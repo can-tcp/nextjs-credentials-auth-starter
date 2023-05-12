@@ -41,20 +41,18 @@ export default function SignUpForm() {
 
   const handleSubmit = async ({ username, password }: SignUpData) => {
     try {
-      const { ok } = await api.signUpUser.action({
+      const { ok } = await api.signUpUser({
         username: username,
         password: password,
       });
 
       if (!ok) {
-        console.error("Error signing up");
         return dispatch({
           severity: "error",
-          message: "Error signing up",
+          message: "Error signing up. Please try again.",
         });
       }
 
-      console.log("User signed up successfully");
       dispatch({
         severity: "success",
         message: "User signed up successfully",

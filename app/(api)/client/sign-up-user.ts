@@ -1,4 +1,4 @@
-import { CallApiResponse, call } from "@/server/api";
+import { ApiResponse, call } from "@/server/api";
 import { User } from "@prisma/client";
 
 export interface SignUpUserPayload {
@@ -8,22 +8,13 @@ export interface SignUpUserPayload {
 
 type Result = Pick<User, "id" | "username">;
 
-export interface SignUpUserResponse extends CallApiResponse<Result> {}
+export interface SignUpUserResponse extends ApiResponse<Result> {}
 
 export default async function SignUpUser(
   payload: SignUpUserPayload
 ): Promise<SignUpUserResponse> {
-  const response = await call<SignUpUserPayload, Result>({
-    name: "signUpUser",
+  return await call<SignUpUserPayload, Result>({
+    endpoint: "signUpUser",
     payload,
   });
-
-  const { ok } = response;
-
-  if (!ok) {
-    console.error("Error signing up user");
-    return response;
-  }
-
-  return response;
 }
