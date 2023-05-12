@@ -1,6 +1,6 @@
 import { randomUUID } from "crypto";
-import { hashPassword } from "../auth/helper";
-import { prisma } from "../db";
+import { hashPassword } from "../server/auth/helper";
+import { prisma } from "../server/db";
 
 export default async function SignUp(username: string, password: string) {
   const createUserPayload = {

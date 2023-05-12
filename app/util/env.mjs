@@ -27,7 +27,7 @@ const server = z.object({
  * built with invalid env vars. To expose them to the client, prefix them with `NEXT_PUBLIC_`.
  */
 const client = z.object({
-  // NEXT_PUBLIC_CLIENTVAR: z.string().min(1),
+  NEXT_PUBLIC_APP_NAME: z.string().min(1),
 });
 
 /**
@@ -42,6 +42,7 @@ const processEnv = {
   NEXTAUTH_URL: process.env.NEXTAUTH_URL,
   VERCEL_URL: process.env.VERCEL_URL,
   HASH_PHRASE: process.env.HASH_PHRASE,
+  NEXT_PUBLIC_APP_NAME: process.env.NEXT_PUBLIC_APP_NAME,
 };
 
 // Don't touch the part below

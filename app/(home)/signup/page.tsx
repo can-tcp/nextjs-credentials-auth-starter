@@ -7,7 +7,7 @@ import { Container, Stack, Typography } from "@mui/material";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React from "react";
-import api from "@/client/api";
+import api from "@/(api)/client";
 
 interface SignUpData {
   username: string;

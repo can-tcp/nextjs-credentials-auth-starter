@@ -5,6 +5,7 @@ import { Container, Stack, Typography } from "@mui/material";
 import { useSession } from "next-auth/react";
 import Link from "@/components/link/link";
 import NextLink from "next/link";
+import { env } from "./util/env.mjs";
 
 export default function Header() {
   const session = useSession();
@@ -28,7 +29,7 @@ export default function Header() {
       >
         <NextLink href={"/"}>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Euro Pastes
+            {env.NEXT_PUBLIC_APP_NAME}
           </Typography>
         </NextLink>
         {isUnauthenticated ? (

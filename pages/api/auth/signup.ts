@@ -1,4 +1,4 @@
-import SignUp from "@/server/api/signup";
+import SignUp from "@/api/signup";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function SignUpHandler(

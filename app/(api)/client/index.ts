@@ -1,11 +1,3 @@
-import CreatePaste, {
-  CreatePastePayload,
-  CreatePasteResponse,
-} from "./create-paste";
-import GetUserPastes, {
-  GetUserPastesPayload,
-  GetUserPastesResponse,
-} from "./get-pastes-for-user";
 import SignUpUser, {
   SignUpUserPayload,
   SignUpUserResponse,
@@ -19,22 +11,10 @@ interface ApiEndpoint<Payload, Response> {
 }
 
 interface ClientApi {
-  createPaste: ApiEndpoint<CreatePastePayload, CreatePasteResponse>;
-  getUserPastes: ApiEndpoint<GetUserPastesPayload, GetUserPastesResponse>;
   signUpUser: ApiEndpoint<SignUpUserPayload, SignUpUserResponse>;
 }
 
 const ClientApi: ClientApi = {
-  createPaste: {
-    action: CreatePaste,
-    method: "POST",
-    path: "/api/pastes/create",
-  },
-  getUserPastes: {
-    action: GetUserPastes,
-    method: "GET",
-    path: "/api/pastes/get/:username",
-  },
   signUpUser: {
     action: SignUpUser,
     method: "POST",

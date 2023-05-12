@@ -1,4 +1,4 @@
-import ClientApi, { ApiEndpointName } from "@/client/api";
+import ClientApi, { ApiEndpointName } from "@/(api)/client";
 
 interface CallApiProps<Payload> {
   name: ApiEndpointName;

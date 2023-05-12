@@ -1,4 +1,4 @@
-import api from "@/client/api";
+import api from "@/(api)/client";
 import { Paste } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
