@@ -1,5 +1,4 @@
-### REQUIRED ENVIRONMENT VARS ARE SPECIFIED IN "/app/util/env.mjs"
-### DB USED WITH PRISMA WAS MONGODB ATLAS (FREE) https://www.mongodb.com/cloud/atlas/register
+### HOW TO RUN
 
 ```bash
 npm run dev
@@ -8,3 +7,15 @@ yarn dev
 # or
 pnpm dev
 ```
+
+DB USED WAS MONGODB ATLAS (FREE) https://www.mongodb.com/cloud/atlas/register
+IF YOU ARE NOT USING MONGO YOU NEED TO MODIFY THE SCHEMA ACCORDINGLY
+
+DATABASE_URL="CONNECTION STRING TO YOUR DB"
+
+HASH_PHRASE="PRIVATE KEY TO HASH CREDENTIALS WITH"
+
+NEXTAUTH_URL="http://localhost:3000"
+NEXTAUTH_SECRET="NEXT AUTH PRIVATE KEY"
+
+NEXT_PUBLIC_APP_NAME="APP NAME"
