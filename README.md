@@ -1,4 +1,4 @@
-### REQUIRED ENVIRONMENT VARS ARE SPECIFIED IN "/app/util/env.mjs
+### REQUIRED ENVIRONMENT VARS ARE SPECIFIED IN "/app/util/env.mjs"
 ### DB USED WITH PRISMA WAS MONGODB ATLAS (FREE) https://www.mongodb.com/cloud/atlas/register
 
 ```bash
