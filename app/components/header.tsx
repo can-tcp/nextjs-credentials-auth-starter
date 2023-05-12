@@ -5,13 +5,12 @@ import { Container, Stack, Typography } from "@mui/material";
 import { useSession } from "next-auth/react";
 import Link from "@/components/link/link";
 import NextLink from "next/link";
-import { env } from "./util/env.mjs";
+import { env } from "../util/env.mjs";
 
 export default function Header() {
   const session = useSession();
 
   const username = session?.data?.user.username;
-  const isUnauthenticated = session?.status === "unauthenticated";
 
   return (
     <Container
@@ -32,19 +31,12 @@ export default function Header() {
             {env.NEXT_PUBLIC_APP_NAME}
           </Typography>
         </NextLink>
-        {isUnauthenticated ? (
-          <Typography variant="h6" component="div">
-            <Link href="/signin">Login</Link>
-          </Typography>
-        ) : username ? (
-          <Typography variant="h6" component="div">
-            <Link href={`/user/${username}`}>Profile</Link>
-          </Typography>
-        ) : (
-          <Typography variant="h6" component="div">
-            <Link href={"/"}>Loading...</Link>
-          </Typography>
-        )}
+
+        <Typography variant="h6" component="div">
+          <Link href={username ? `/user/${username}` : "/signin"}>
+            {username || "Login"}
+          </Link>
+        </Typography>
       </Stack>
     </Container>
   );

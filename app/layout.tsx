@@ -1,7 +1,11 @@
+"use client";
+
 import "./styles/globals.css";
 import Providers from "./providers";
 import { env } from "./util/env.mjs";
 import { Inter } from "next/font/google";
+import { Container, Stack } from "@mui/material";
+import Header from "./components/header";
 
 export const metadata = {
   title: "Create Next App",
@@ -22,17 +26,37 @@ export default function RootLayout({ children }: RootLayoutProps) {
         style={{
           height: "100vh",
           minHeight: "100vh",
+          position: "relative",
+          display: "flex",
+          justifyContent: "center",
         }}
       >
         <BetaBanner />
-        <Providers>{children}</Providers>
+        <Providers>
+          <Header />
+          <Container
+            sx={{
+              height: "100%",
+            }}
+          >
+            <Stack
+              direction={"column"}
+              gap={"1rem"}
+              justifyContent={"center"}
+              alignItems={"center"}
+              height={"100%"}
+            >
+              {children}
+            </Stack>
+          </Container>
+        </Providers>
       </body>
     </html>
   );
 }
 
 function BetaBanner() {
-  return env.NODE_ENV === "production" ? (
+  return env.NEXT_PUBLIC_NODE_ENV === "production" ? (
     <div
       style={{
         position: "fixed",

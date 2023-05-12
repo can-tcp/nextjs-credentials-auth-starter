@@ -73,38 +73,24 @@ export default function SignUpForm() {
   };
 
   return (
-    <Container
-      maxWidth={"xs"}
-      sx={{
-        height: "100%",
-      }}
-    >
-      <Stack
-        direction={"column"}
-        justifyContent={"center"}
-        gap={"1rem"}
-        sx={{
-          height: "100%",
-        }}
-      >
-        <Typography variant="h4">Sign Up</Typography>
-        <Form
-          submitText="Sign Up"
-          fields={SignUpFields}
-          onSubmit={(event) => {
-            if (event.password !== event.confirm_password) {
-              alert("Passwords do not match");
-              return;
-            }
+    <Stack width={"24rem"} gap={"1rem"}>
+      <Typography variant="h4">Sign Up</Typography>
+      <Form
+        submitText="Sign Up"
+        fields={SignUpFields}
+        onSubmit={(event) => {
+          if (event.password !== event.confirm_password) {
+            alert("Passwords do not match");
+            return;
+          }
 
-            handleSubmit({
-              username: event.username,
-              password: event.password,
-            });
-          }}
-        />
-        <Link href={"/signin"}>Already have an account?</Link>
-      </Stack>
-    </Container>
+          handleSubmit({
+            username: event.username,
+            password: event.password,
+          });
+        }}
+      />
+      <Link href={"/signin"}>Already have an account?</Link>
+    </Stack>
   );
 }

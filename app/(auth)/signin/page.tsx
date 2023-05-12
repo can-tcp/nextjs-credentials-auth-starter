@@ -3,7 +3,7 @@
 import useDispatchAlert from "@/hooks/use-dispatch-alert";
 import Form, { FormField } from "@/components/form/form";
 import Link from "@/components/link/link";
-import { Container, Stack, Typography } from "@mui/material";
+import { Box, Container, Stack, Typography } from "@mui/material";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -64,33 +64,19 @@ export default function SignInPage() {
   };
 
   return (
-    <Container
-      maxWidth={"xs"}
-      sx={{
-        height: "100%",
-      }}
-    >
-      <Stack
-        direction={"column"}
-        justifyContent={"center"}
-        gap={"1rem"}
-        sx={{
-          height: "100%",
-        }}
-      >
-        <Typography variant="h4">Sign In</Typography>
-        <Form
-          submitText="Sign In"
-          fields={SignInFields}
-          onSubmit={(event) =>
-            handleSubmit({
-              username: event.username,
-              password: event.password,
-            })
-          }
-        />
-        <Link href={"/signup"}>Don&apos;t have an account?</Link>
-      </Stack>
-    </Container>
+    <Stack width={"24rem"} gap={"1rem"}>
+      <Typography variant="h4">Sign In</Typography>
+      <Form
+        submitText="Sign In"
+        fields={SignInFields}
+        onSubmit={(event) =>
+          handleSubmit({
+            username: event.username,
+            password: event.password,
+          })
+        }
+      />
+      <Link href={"/signup"}>Don&apos;t have an account?</Link>
+    </Stack>
   );
 }
